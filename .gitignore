@@ -31,8 +31,14 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# env files - CRITICAL: Never commit environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.example
+env.example
 
 # vercel
 .vercel
@@ -40,3 +46,47 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+
+# Claude settings - contains sensitive configuration
+.claude/
+CLAUDE.md
+
+# Database files - may contain sensitive data
+*.sqlite
+*.sqlite3
+*.db
+/drizzle/
+
+# Logs and temporary files
+*.log
+tmp/
+temp/
+.tmp/
+
+# Security and sensitive files
+*.key
+*.crt
+*.pem
+*.p12
+*.pfx
+config/secrets.json
+secrets/
+private/
+
+# Backup and temporary files
+*.backup
+*.bak
+*.old
+*~
+.#*

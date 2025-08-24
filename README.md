@@ -1,51 +1,33 @@
-# Agentic Coding Boilerplate
+# Away Days
 
-A complete agentic coding boilerplate with authentication, PostgreSQL database, AI chat functionality, and modern UI components - perfect for building AI-powered applications and autonomous agents.
+A modern web application for planning and organizing your time away with friends and experiences. Built with Next.js 15, React 19, TypeScript, and featuring a sleek UI with authentication.
 
 ## 🚀 Features
 
-- **🔐 Authentication**: Better Auth with Google OAuth integration
-- **🗃️ Database**: Drizzle ORM with PostgreSQL
-- **🤖 AI Integration**: Vercel AI SDK with OpenAI support
-- **🎨 UI Components**: shadcn/ui with Tailwind CSS
-- **⚡ Modern Stack**: Next.js 15, React 19, TypeScript
-- **📱 Responsive**: Mobile-first design approach
-
-## 🎥 Video Tutorial
-
-Watch the complete walkthrough of this agentic coding template:
-
-[![Agentic Coding Boilerplate Tutorial](https://img.youtube.com/vi/T0zFZsr_d0Q/maxresdefault.jpg)](https://youtu.be/T0zFZsr_d0Q)
-
-<a href="https://youtu.be/T0zFZsr_d0Q" target="_blank" rel="noopener noreferrer">🔗 Watch on YouTube</a>
-
-## ☕ Support This Project
-
-If this boilerplate helped you build something awesome, consider buying me a coffee!
-
-[![Buy me a coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/leonvanzyl)
+- **🔐 Authentication**: Secure user authentication with Google OAuth
+- **🗃️ Database**: PostgreSQL database with Drizzle ORM
+- **🎨 Modern UI**: Beautiful, responsive design with Tailwind CSS and shadcn/ui components
+- **👥 Friend Management**: Add and manage your friends
+- **📅 Experience Tracking**: Plan and track your away days and experiences
+- **📱 Responsive Design**: Mobile-first approach that works on all devices
+- **⚡ Modern Stack**: Built with the latest technologies
 
 ## 📋 Prerequisites
 
-Before you begin, ensure you have the following installed on your machine:
+Before you begin, ensure you have the following installed:
 
-- **Node.js**: Version 18.0 or higher (<a href="https://nodejs.org/" target="_blank">Download here</a>)
-- **Git**: For cloning the repository (<a href="https://git-scm.com/" target="_blank">Download here</a>)
-- **PostgreSQL**: Either locally installed or access to a hosted service like Vercel Postgres
+- **Node.js**: Version 18.0 or higher ([Download here](https://nodejs.org/))
+- **Git**: For cloning the repository ([Download here](https://git-scm.com/))
+- **PostgreSQL**: Either locally installed or access to a hosted service
 
 ## 🛠️ Quick Setup
 
-### 1. Clone or Download the Repository
-
-**Option A: Clone with Git**
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/leonvanzyl/agentic-coding-starter-kit.git
-cd agentic-coding-starter-kit
+git clone https://github.com/Ehsaan75/Away-Days.git
+cd Away-Days
 ```
-
-**Option B: Download ZIP**
-Download the repository as a ZIP file and extract it to your desired location.
 
 ### 2. Install Dependencies
 
@@ -55,13 +37,7 @@ npm install
 
 ### 3. Environment Setup
 
-Copy the example environment file:
-
-```bash
-cp env.example .env
-```
-
-Fill in your environment variables in the `.env` file:
+Create a `.env` file in the root directory and add your environment variables:
 
 ```env
 # Database
@@ -73,10 +49,6 @@ BETTER_AUTH_SECRET="your-random-32-character-secret-key-here"
 # Google OAuth (Get from Google Cloud Console)
 GOOGLE_CLIENT_ID="your-google-client-id"
 GOOGLE_CLIENT_SECRET="your-google-client-secret"
-
-# AI Integration (Optional - for chat functionality)
-OPENAI_API_KEY="sk-your-openai-api-key-here"
-OPENAI_MODEL="gpt-5-mini"
 
 # App URL (for production deployments)
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
@@ -101,18 +73,16 @@ Your application will be available at [http://localhost:3000](http://localhost:3
 
 ## ⚙️ Service Configuration
 
-### PostgreSQL Database on Vercel
+### PostgreSQL Database
 
-1. Go to <a href="https://vercel.com/dashboard" target="_blank">Vercel Dashboard</a>
-2. Navigate to the **Storage** tab
-3. Click **Create** → **Postgres**
-4. Choose your database name and region
-5. Copy the `POSTGRES_URL` from the `.env.local` tab
-6. Add it to your `.env` file
+For development, you can use a local PostgreSQL instance or a cloud service like:
+- [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres)
+- [Supabase](https://supabase.com/)
+- [Railway](https://railway.app/)
 
-### Google OAuth Credentials
+### Google OAuth Setup
 
-1. Go to <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a>
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Create a new project or select an existing one
 3. Navigate to **Credentials** → **Create Credentials** → **OAuth 2.0 Client ID**
 4. Set application type to **Web application**
@@ -121,14 +91,6 @@ Your application will be available at [http://localhost:3000](http://localhost:3
    - `https://yourdomain.com/api/auth/callback/google` (production)
 6. Copy the **Client ID** and **Client Secret** to your `.env` file
 
-### OpenAI API Key
-
-1. Go to <a href="https://platform.openai.com/dashboard" target="_blank">OpenAI Platform</a>
-2. Navigate to **API Keys** in the sidebar
-3. Click **Create new secret key**
-4. Give it a name and copy the key
-5. Add it to your `.env` file as `OPENAI_API_KEY`
-
 ## 🗂️ Project Structure
 
 ```
@@ -136,16 +98,18 @@ src/
 ├── app/                    # Next.js app directory
 │   ├── api/               # API routes
 │   │   ├── auth/          # Authentication endpoints
-│   │   └── chat/          # AI chat endpoint
-│   ├── chat/              # AI chat page
+│   │   ├── experiences/   # Experience management
+│   │   └── friends/       # Friend management
+│   ├── add-experience/    # Add experience page
+│   ├── edit-experience/   # Edit experience page
+│   ├── friends/           # Friends management page
 │   ├── dashboard/         # User dashboard
 │   └── page.tsx           # Home page
 ├── components/            # React components
-│   ├── auth/             # Authentication components
-│   └── ui/               # shadcn/ui components
+│   ├── ui/               # shadcn/ui components
+│   └── ...               # Other components
 └── lib/                  # Utilities and configurations
-    ├── auth.ts           # Better Auth configuration
-    ├── auth-client.ts    # Client-side auth utilities
+    ├── auth.ts           # Authentication configuration
     ├── db.ts             # Database connection
     ├── schema.ts         # Database schema
     └── utils.ts          # General utilities
@@ -154,10 +118,11 @@ src/
 ## 🔧 Available Scripts
 
 ```bash
-npm run dev          # Start development server with Turbopack
+npm run dev          # Start development server
 npm run build        # Build for production
 npm run start        # Start production server
 npm run lint         # Run ESLint
+npm run typecheck    # Run TypeScript type checking
 npm run db:generate  # Generate database migrations
 npm run db:migrate   # Run database migrations
 npm run db:push      # Push schema changes to database
@@ -168,46 +133,21 @@ npm run db:reset     # Reset database (drop all tables)
 
 ## 📖 Pages Overview
 
-- **Home (`/`)**: Landing page with setup instructions and features overview
-- **Dashboard (`/dashboard`)**: Protected user dashboard with profile information
-- **Chat (`/chat`)**: AI-powered chat interface using OpenAI (requires authentication)
+- **Home (`/`)**: Landing page with app overview
+- **Dashboard (`/dashboard`)**: Protected user dashboard
+- **Friends (`/friends`)**: Manage your friends list
+- **Add Experience (`/add-experience`)**: Create new experiences
+- **Edit Experience (`/edit-experience/[id]`)**: Edit existing experiences
 
 ## 🚀 Deployment
 
 ### Deploy to Vercel (Recommended)
 
-1. Install the Vercel CLI globally:
-
-   ```bash
-   npm install -g vercel
-   ```
-
-2. Deploy your application:
-
-   ```bash
-   vercel --prod
-   ```
-
-3. Follow the prompts to configure your deployment
-4. Add your environment variables when prompted or via the Vercel dashboard
-
-### Production Environment Variables
-
-Ensure these are set in your production environment:
-
-- `POSTGRES_URL` - Production PostgreSQL connection string
-- `BETTER_AUTH_SECRET` - Secure random 32+ character string
-- `GOOGLE_CLIENT_ID` - Google OAuth Client ID
-- `GOOGLE_CLIENT_SECRET` - Google OAuth Client Secret
-- `OPENAI_API_KEY` - OpenAI API key (optional)
-- `OPENAI_MODEL` - OpenAI model name (optional, defaults to gpt-5-mini)
-- `NEXT_PUBLIC_APP_URL` - Your production domain
-
-## 🎥 Tutorial Video
-
-Watch my comprehensive tutorial on how to use this agentic coding boilerplate to build AI-powered applications:
-
-<a href="https://youtu.be/T0zFZsr_d0Q" target="_blank" rel="noopener noreferrer">📺 YouTube Tutorial - Building with Agentic Coding Boilerplate</a>
+1. Fork this repository on GitHub
+2. Connect your Vercel account to GitHub
+3. Import the project in Vercel
+4. Add your environment variables in the Vercel dashboard
+5. Deploy!
 
 ## 🤝 Contributing
 
@@ -219,16 +159,15 @@ Watch my comprehensive tutorial on how to use this agentic coding boilerplate to
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
 ## 🆘 Need Help?
 
 If you encounter any issues:
 
-1. Check the [Issues](https://github.com/leonvanzyl/agentic-coding-starter-kit/issues) section
-2. Review the documentation above
-3. Create a new issue with detailed information about your problem
+1. Check the [Issues](https://github.com/Ehsaan75/Away-Days/issues) section
+2. Create a new issue with detailed information about your problem
 
 ---
 
-**Happy coding! 🚀**
+**Happy planning! 🚀**

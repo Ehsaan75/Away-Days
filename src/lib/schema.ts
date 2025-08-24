@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, integer } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -48,4 +48,87 @@ export const verification = pgTable("verification", {
   expiresAt: timestamp("expiresAt").notNull(),
   createdAt: timestamp("createdAt").defaultNow(),
   updatedAt: timestamp("updatedAt").defaultNow(),
+});
+
+export const matches = pgTable("matches", {
+  id: text("id").primaryKey(),
+  homeTeam: text("homeTeam").notNull(),
+  awayTeam: text("awayTeam").notNull(),
+  homeScore: integer("homeScore"),
+  awayScore: integer("awayScore"),
+  matchDate: timestamp("matchDate").notNull(),
+  competition: text("competition").notNull(),
+  venue: text("venue"),
+  season: text("season").notNull(),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+  updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+});
+
+export const watchingExperiences = pgTable("watchingExperiences", {
+  id: text("id").primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  matchId: text("matchId")
+    .references(() => matches.id, { onDelete: "cascade" }),
+  customMatchDescription: text("customMatchDescription"),
+  watchingLocation: text("watchingLocation").notNull(),
+  locationDetails: text("locationDetails"),
+  rating: integer("rating").notNull(),
+  review: text("review"),
+  watchedAt: timestamp("watchedAt").notNull(),
+  isPublic: boolean("isPublic").notNull().default(true),
+  aiCategorizedLocation: text("aiCategorizedLocation"),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+  updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+});
+
+export const friendships = pgTable("friendships", {
+  id: text("id").primaryKey(),
+  requesterId: text("requesterId")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  addresseeId: text("addresseeId")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  status: text("status", { enum: ["pending", "accepted", "declined", "blocked"] })
+    .notNull()
+    .default("pending"),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+  updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+});
+
+export const experienceMedia = pgTable("experienceMedia", {
+  id: text("id").primaryKey(),
+  experienceId: text("experienceId")
+    .notNull()
+    .references(() => watchingExperiences.id, { onDelete: "cascade" }),
+  mediaType: text("mediaType", { enum: ["photo", "video"] }).notNull(),
+  mediaUrl: text("mediaUrl").notNull(),
+  caption: text("caption"),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+});
+
+export const likes = pgTable("likes", {
+  id: text("id").primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  experienceId: text("experienceId")
+    .notNull()
+    .references(() => watchingExperiences.id, { onDelete: "cascade" }),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+});
+
+export const comments = pgTable("comments", {
+  id: text("id").primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  experienceId: text("experienceId")
+    .notNull()
+    .references(() => watchingExperiences.id, { onDelete: "cascade" }),
+  content: text("content").notNull(),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+  updatedAt: timestamp("updatedAt").notNull().defaultNow(),
 });
