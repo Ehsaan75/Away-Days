@@ -4,10 +4,10 @@ import { db } from "@/lib/db";
 import { matches, watchingExperiences, experienceMedia } from "@/lib/schema";
 import { eq, and } from "drizzle-orm";
 
-interface RouteParams {
-  params: {
+type RouteParams = {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export async function PATCH(request: NextRequest, { params }: RouteParams) {
@@ -20,7 +20,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const experienceId = params.id;
+    const { id: experienceId } = await params;
     const body = await request.json();
     
     const {
@@ -134,7 +134,7 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const experienceId = params.id;
+    const { id: experienceId } = await params;
 
     // Verify experience belongs to user
     const existingExperience = await db
