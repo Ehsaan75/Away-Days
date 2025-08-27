@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "npm run db:migrate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
@@ -36,6 +36,7 @@
     "next": "15.4.6",
     "next-themes": "^0.4.6",
     "pg": "^8.16.3",
+    "playwright": "^1.55.0",
     "postgres": "^3.4.7",
     "react": "19.1.0",
     "react-dom": "19.1.0",
